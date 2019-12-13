@@ -1,0 +1,8 @@
+---
+- name: Run enable task
+  include_tasks: enable_service.yml
+  loop: "{{ launchctl_enable_services }}"
+
+- name: Run disable task
+  include_tasks: disable_service.yml
+  loop: "{{ launchctl_disable_services }}"

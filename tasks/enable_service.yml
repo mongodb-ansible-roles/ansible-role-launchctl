@@ -1,0 +1,12 @@
+---
+- name: Get {{ item.name }} status to enable
+  become: true
+  command: launchctl list {{ item.service }}
+  register: status
+  changed_when: false
+  ignore_errors: true
+
+- name: Start {{ item.name }} service
+  become: true
+  command: launchctl load -w {{ item.plist }}
+  when: status.rc != 0
